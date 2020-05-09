@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="RestAPI_POC" duration-ms="6023" started-at="2020-05-10T00:33:47 IST" finished-at="2020-05-10T00:33:53 IST">
+    <groups>
+    </groups>
+    <test name="Method Test Cases" duration-ms="6023" started-at="2020-05-10T00:33:47 IST" finished-at="2020-05-10T00:33:53 IST">
+      <class name="com.restassured.baseTest.TestFile.ReqresTest">
+        <test-method status="PASS" signature="callingBaseURI()[pri:0, instance:com.restassured.baseTest.TestFile.ReqresTest@4667ae56]" name="callingBaseURI" is-config="true" duration-ms="994" started-at="2020-05-10T00:33:47 IST" finished-at="2020-05-10T00:33:48 IST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- callingBaseURI -->
+        <test-method status="PASS" signature="callingJsonResponse()[pri:0, instance:com.restassured.baseTest.TestFile.ReqresTest@4667ae56]" name="callingJsonResponse" is-config="true" duration-ms="4" started-at="2020-05-10T00:33:48 IST" finished-at="2020-05-10T00:33:48 IST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- callingJsonResponse -->
+        <test-method status="PASS" signature="postResponse()[pri:0, instance:com.restassured.baseTest.TestFile.ReqresTest@4667ae56]" name="postResponse" duration-ms="4964" started-at="2020-05-10T00:33:48 IST" finished-at="2020-05-10T00:33:53 IST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- postResponse -->
+      </class> <!-- com.restassured.baseTest.TestFile.ReqresTest -->
+    </test> <!-- Method Test Cases -->
+  </suite> <!-- RestAPI_POC -->
+</testng-results>
