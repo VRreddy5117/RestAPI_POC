@@ -2,24 +2,24 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="RestAPI_POC" duration-ms="6023" started-at="2020-05-10T00:33:47 IST" finished-at="2020-05-10T00:33:53 IST">
+  <suite name="Default Suite" duration-ms="6920" started-at="2020-05-10T13:15:36 IST" finished-at="2020-05-10T13:15:43 IST">
     <groups>
     </groups>
-    <test name="Method Test Cases" duration-ms="6023" started-at="2020-05-10T00:33:47 IST" finished-at="2020-05-10T00:33:53 IST">
+    <test name="RestAPI_POC" duration-ms="6920" started-at="2020-05-10T13:15:36 IST" finished-at="2020-05-10T13:15:43 IST">
       <class name="com.restassured.baseTest.TestFile.ReqresTest">
-        <test-method status="PASS" signature="callingBaseURI()[pri:0, instance:com.restassured.baseTest.TestFile.ReqresTest@4667ae56]" name="callingBaseURI" is-config="true" duration-ms="994" started-at="2020-05-10T00:33:47 IST" finished-at="2020-05-10T00:33:48 IST">
+        <test-method status="PASS" signature="callingBaseURI()[pri:0, instance:com.restassured.baseTest.TestFile.ReqresTest@14bf9759]" name="callingBaseURI" is-config="true" duration-ms="593" started-at="2020-05-10T13:15:36 IST" description="This is first test for this package" finished-at="2020-05-10T13:15:37 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- callingBaseURI -->
-        <test-method status="PASS" signature="callingJsonResponse()[pri:0, instance:com.restassured.baseTest.TestFile.ReqresTest@4667ae56]" name="callingJsonResponse" is-config="true" duration-ms="4" started-at="2020-05-10T00:33:48 IST" finished-at="2020-05-10T00:33:48 IST">
+        <test-method status="PASS" signature="reponseJson()[pri:0, instance:com.restassured.baseTest.TestFile.ReqresTest@14bf9759]" name="reponseJson" is-config="true" duration-ms="0" started-at="2020-05-10T13:15:37 IST" description="This method should run after callingBaseURI" finished-at="2020-05-10T13:15:37 IST">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- callingJsonResponse -->
-        <test-method status="PASS" signature="postResponse()[pri:0, instance:com.restassured.baseTest.TestFile.ReqresTest@4667ae56]" name="postResponse" duration-ms="4964" started-at="2020-05-10T00:33:48 IST" finished-at="2020-05-10T00:33:53 IST">
+        </test-method> <!-- reponseJson -->
+        <test-method status="PASS" signature="postrequest()[pri:0, instance:com.restassured.baseTest.TestFile.ReqresTest@14bf9759]" name="postrequest" duration-ms="6274" started-at="2020-05-10T13:15:37 IST" finished-at="2020-05-10T13:15:43 IST">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- postResponse -->
+        </test-method> <!-- postrequest -->
       </class> <!-- com.restassured.baseTest.TestFile.ReqresTest -->
-    </test> <!-- Method Test Cases -->
-  </suite> <!-- RestAPI_POC -->
+    </test> <!-- RestAPI_POC -->
+  </suite> <!-- Default Suite -->
 </testng-results>

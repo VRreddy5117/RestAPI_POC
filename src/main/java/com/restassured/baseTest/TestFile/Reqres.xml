@@ -5,10 +5,5 @@
             <class name="com.restassured.baseTest.TestFile.ReqresTest">
             </class>
         </classes>
-        <groups>
-            <run>
-                <include name="";
-            </run>
-        </groups>
     </test>
 </suite>
