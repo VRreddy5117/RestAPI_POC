@@ -24,7 +24,7 @@
     <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">1 suite, 1 failed test</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -38,7 +38,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" class="navigator-link" panel-name="suite-Default_Suite">
-              <span class="suite-name border-passed">Default Suite</span>
+              <span class="suite-name border-failed">Default Suite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -91,7 +91,21 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">1 method,   1 passed</span>
+                    <span class="method-stats">2 methods, 1 failed,   1 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Default_Suite" class="hide-methods failed suite-Default_Suite"> (hide)</a> <!-- hide-methods failed suite-Default_Suite -->
+                      <a href="#" panel-name="suite-Default_Suite" class="show-methods failed suite-Default_Suite"> (show)</a> <!-- show-methods failed suite-Default_Suite -->
+                    </span>
+                    <div class="method-list-content failed suite-Default_Suite">
+                      <span>
+                        <img width="3%" src="failed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_Suite" title="com.restassured.baseTest.TestFile.ReqresTest" hash-for-method="getrequest">getrequest</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-Default_Suite -->
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -117,6 +131,32 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Default_Suite" class="panel Default_Suite">
+          <div class="suite-Default_Suite-class-failed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="failed.png"/>
+              <span class="class-name">com.restassured.baseTest.TestFile.ReqresTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="getrequest">
+                  </a> <!-- getrequest -->
+                  <span class="method-name">getrequest</span>
+                  <div class="stack-trace">org.json.JSONException: JSONObject[&quot;page&quot;] not a string.
+	at org.json.JSONObject.getString(JSONObject.java:840)
+	at com.restassured.baseTest.ReqRes.ReqresAPI.getresponse(ReqresAPI.java:81)
+	at com.restassured.baseTest.TestFile.ReqresTest.getrequest(ReqresTest.java:47)
+	at java.util.ArrayList.forEach(ArrayList.java:1257)
+	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)
+	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:110)
+... Removed 24 stack frames
+</div> <!-- stack-trace -->
+                  <em>
+(using reqres API getting all existing users data)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Default_Suite-class-failed -->
           <div class="suite-Default_Suite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
@@ -128,6 +168,8 @@
                   <a name="postrequest">
                   </a> <!-- postrequest -->
                   <span class="method-name">postrequest</span>
+                  <em>
+(using reqres api creating new user)                  </em>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -184,16 +226,20 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(1);
+data.addRows(2);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'postrequest')
+data.setCell(0, 1, 'getrequest')
 data.setCell(0, 2, 'com.restassured.baseTest.TestFile.ReqresTest')
-data.setCell(0, 3, 6274);
+data.setCell(0, 3, 2789);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'postrequest')
+data.setCell(1, 2, 'com.restassured.baseTest.TestFile.ReqresTest')
+data.setCell(1, 3, 2752);
 window.suiteTableData['Default_Suite']= { tableData: data, tableDiv: 'times-div-Default_Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 6 seconds</span>
+              <span class="suite-total-time">Total running time: 5 seconds</span>
               <div id="times-div-Default_Suite">
               </div> <!-- times-div-Default_Suite -->
             </div> <!-- times-div -->
@@ -224,13 +270,19 @@ return data;
                 <span class="method-name">callingBaseURI</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-test before -->
-              <div class="configuration-method before">
+              <div class="configuration-test before">
                 <span class="method-name">reponseJson</span>
-                <span class="method-start">623 ms</span>
-              </div> <!-- configuration-method before -->
+                <span class="method-start">529 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">getrequest</span>
+                <span class="method-start">554 ms</span>
+              </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">postrequest</span>
-                <span class="method-start">624 ms</span>
+                <span class="method-start">3350 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

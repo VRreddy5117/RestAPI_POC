@@ -1,12 +1,12 @@
 package com.restassured.baseTest.ReqRes;
 
+import com.restassured.baseTest.Weather.PropertiesClass;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.testng.Assert;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -22,6 +22,7 @@ public class ReqresAPI {
     private static Logger log = Logger.getLogger(String.valueOf(ReqresAPI.class));
     protected static Properties prop = null;
     static JSONParser parser;
+    static String station_id;
 
 
     static {
@@ -34,7 +35,7 @@ public class ReqresAPI {
             e.printStackTrace();
         }
         try {
-            prop = PropertiesClass1.loader_properties();
+            prop = PropertiesClass.loader_properties();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -77,7 +78,10 @@ public class ReqresAPI {
         String str1 = response.getBody().asString();
         System.out.println(str1);
 
-        org.json.JSONObject result = new org.json.JSONObject(str1);
+        org.json.JSONObject result = new org.json.JSONObject(getresponse.asString());
+        station_id = result.getString("id");
+        System.out.println(result.getString("id"));
+       // org.json.JSONObject result = new org.json.JSONObject(str1);
         String getelement = result.getString("page");
         System.out.println(getelement);
         return response;
