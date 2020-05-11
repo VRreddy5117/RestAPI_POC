@@ -40,13 +40,10 @@ public class ReqresAPI {
         }
 
     }
-    public static void callingJsonResponse() throws IOException, ParseException {
-
+    public static void readFile() throws IOException, ParseException {
         parser = new JSONParser();
         Object obj = parser.parse(new FileReader("src/main/resources/Files/create.json"));
         jsonObject = (JSONObject) obj;
-        System.out.println("JSON Response :: " + jsonObject);
-
     }
 
 
