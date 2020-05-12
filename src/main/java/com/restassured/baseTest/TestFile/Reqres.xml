@@ -1,9 +1,0 @@
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="RestAPI_POC" verbose="1" >
-    <test name="Method Test Cases" >
-        <classes>
-            <class name="com.restassured.baseTest.TestFile.ReqresTest">
-            </class>
-        </classes>
-    </test>
-</suite>
