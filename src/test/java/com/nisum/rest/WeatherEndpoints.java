@@ -35,6 +35,7 @@ public class WeatherEndpoints {
                 .contentType(ContentType.JSON)
                 .body(jsonObject.toString())
                 .post("post_path");
+        System.out.println(response);
         return response;
     }
 
@@ -43,7 +44,10 @@ public class WeatherEndpoints {
         response = RestAssured.given()
                 .when().queryParam("appid", prop.getProperty("APP_ID"))
                 .get("/stations/" + station_id);
+        System.out.println(response);
         return response;
+
+
     }
 }
 
