@@ -5,8 +5,10 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
-import org.testng.annotations.Test;
+import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -15,7 +17,7 @@ public class WeatherEndpoints {
     private static Logger log = Logger.getLogger(WeatherEndpoints.class);
     static Response response = null;
     static org.json.JSONObject jsonObject;
-    static  String station_id;
+    static String station_id;
     protected static Properties prop = null;
 
     static {
@@ -28,22 +30,38 @@ public class WeatherEndpoints {
         }
     }
 
-    @Test
+
     public static Response postMethod() {
-        response = RestAssured.given()
-                .when().queryParam("appid", prop.getProperty("APP_ID"))
-                .contentType(ContentType.JSON)
-                .body(jsonObject.toString())
-                .post("post_path");
-        System.out.println(response);
+
+        JSONParser parser = new JSONParser();
+        try {
+
+            // File -1 Reading
+            Object obj = parser.parse(new FileReader("src/test/resources/data/Weather.json"));
+
+            org.json.simple.JSONObject jsonObject = (org.json.simple.JSONObject) obj;
+            System.out.println(" JSON Response is :: " + jsonObject);
+            JSONObject res = new JSONObject(jsonObject.toString());
+
+            System.out.println(res);
+            response = RestAssured.given()
+                    .when().queryParam("appid", prop.getProperty("APP_ID"))
+                    .contentType(ContentType.JSON)
+                    .body(res)
+                    .post("weather_path");
+            System.out.println(response);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return response;
     }
 
-    public static Response getMethod() {
 
+    public static Response getResponse() {
         response = RestAssured.given()
                 .when().queryParam("appid", prop.getProperty("APP_ID"))
-                .get("/stations/" + station_id);
+                .get(prop.getProperty("weather_path"));
         System.out.println(response);
         return response;
 
