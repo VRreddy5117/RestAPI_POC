@@ -7,16 +7,20 @@ import io.restassured.response.Response;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-public class EmployeeEndpoints {
-    private static Logger log = Logger.getLogger(EmployeeEndpoints.class);
+public class EmployeeEndpoints extends CommonUtils {
+
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(EmployeeEndpoints.class);
     static Response response = null;
-   // static JSONObject jsonObject;
+    // static JSONObject jsonObject;
     protected static Properties prop = null;
 
     static {
@@ -29,26 +33,18 @@ public class EmployeeEndpoints {
         }
     }
 
-    public static Response postMethod() {
-
+    public static Response postMethod() throws IOException, ParseException {
+        Object obj;
         JSONParser parser = new JSONParser();
-        try {
-            // File -1 Reading
-            Object obj = parser.parse(new FileReader("src/test/resources/data/employee.json"));
+        obj = parser.parse(new FileReader("src/test/resources/data/employee.json"));
+        readJson();
 
-            org.json.simple.JSONObject jsonObject = (org.json.simple.JSONObject) obj;
-            System.out.println("File-1 JSON Response :: " + jsonObject);
-            JSONObject res = new JSONObject(jsonObject.toString());
+        response = RestAssured.given()
+                .when()
+                .contentType(ContentType.JSON)
+                .body(res)
+                .post(prop.getProperty("Employee_post"));
 
-            response = RestAssured.given()
-                    .when()
-                    .contentType(ContentType.JSON)
-                    .body(res)
-                    .post(prop.getProperty("Employee_post"));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return response;
     }
 
@@ -56,10 +52,10 @@ public class EmployeeEndpoints {
 
         response = RestAssured.given()
                 .when()
-                .get(prop.getProperty("Employee_get")); // read from prop file
+                .get(prop.getProperty("Employee_get"));
 
         int statusCode = response.getStatusCode();
-      //  Assert.assertEquals(statusCode, 200);
+        Assert.assertEquals(statusCode, 200);
         return response;
     }
 }

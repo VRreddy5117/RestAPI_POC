@@ -7,16 +7,21 @@ import io.restassured.response.Response;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-public class ReqResEndpoints {
-    private static Logger log = Logger.getLogger(ReqResEndpoints.class);
+public class ReqResEndpoints extends CommonUtils {
+    // private static Logger log = Logger.getLogger(ReqResEndpoints.class);
+    // static JSONObject jsonObject;
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ReqResEndpoints.class);
     static Response response = null;
-    static JSONObject jsonObject;
+
     protected static Properties prop = null;
 
     static {
@@ -29,39 +34,26 @@ public class ReqResEndpoints {
         }
     }
 
-    public static Response postMethod() {
+    public static Response postMethod() throws IOException, ParseException {
+        Object obj;
         JSONParser parser = new JSONParser();
-        try {
+        obj = parser.parse(new FileReader("src/test/resources/data/Reqres.json"));
+        readJson();
+        response = RestAssured.given()
+                .when()
+                .contentType(ContentType.JSON)
+                .body(res)
+                .post(prop.getProperty("GET_PATH"));
 
-            // File -1 Reading
-            Object obj = parser.parse(new FileReader("src/test/resources/data/Reqres.json"));
-
-            org.json.simple.JSONObject jsonObject = (org.json.simple.JSONObject) obj;
-            System.out.println("File-1 JSON Response :: " + jsonObject);
-            JSONObject res = new JSONObject(jsonObject.toString());
-
-            response = RestAssured.given()
-                    .when()
-                    .contentType(ContentType.JSON)
-                    .body(res)
-                    .post(prop.getProperty("GET_PATH"));  // Read from properties file
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return response;
     }
 
     public static Response getMethod() {
         response = RestAssured.given()
                 .when().queryParam("page", prop.getProperty("param"))
-                .get(prop.getProperty("GET_PATH")); // read from prop file
+                .get(prop.getProperty("GET_PATH"));
 
-        int statusCode = response.getStatusCode();
-       // Assert.assertEquals(statusCode, 200);
-        // logs
-        // log.warn("");
+        //   int statusCode = response.getStatusCode();
         return response;
     }
 }
