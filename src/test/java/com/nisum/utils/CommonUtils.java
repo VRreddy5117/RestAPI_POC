@@ -3,7 +3,7 @@ package com.nisum.utils;
 import com.nisum.rest.ReqResEndpoints;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
@@ -11,8 +11,9 @@ import java.util.Properties;
 
 public class CommonUtils {
 
-    public static Object JSONObject;
     public static JSONObject res;
+    private static final Logger logger = LoggerFactory.getLogger(ReqResEndpoints.class);
+
 
     public static Properties readProperties() throws Exception {
         Properties properties = new Properties();
@@ -22,21 +23,18 @@ public class CommonUtils {
         return properties;
     }
 
-    public static void readJson() {
 
-        final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ReqResEndpoints.class);
-
-        Object obj = null;
+    public static JSONObject readJsonFile(String fileName) {
+        JSONParser parser = new JSONParser();
+        JSONObject jsonObject = null;
         try {
-
-            org.json.simple.JSONObject jsonObject = (org.json.simple.JSONObject) obj;
-
-            LOGGER.info("Json response : " + jsonObject);
-            res = new JSONObject(jsonObject.toString());
-
-
+            Reader reader = new FileReader("src/test/resources/data/" + fileName + "");
+            jsonObject = (JSONObject) parser.parse(reader);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return jsonObject;
     }
+
 }
+

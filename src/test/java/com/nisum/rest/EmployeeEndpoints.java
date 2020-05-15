@@ -4,59 +4,69 @@ import com.nisum.utils.CommonUtils;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.apache.log4j.Logger;
 import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Properties;
 
-public class EmployeeEndpoints extends CommonUtils {
+public class EmployeeEndpoints {
 
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(EmployeeEndpoints.class);
-    static Response response = null;
-    // static JSONObject jsonObject;
-    protected static Properties prop = null;
 
-    static {
-        try {
-            prop = CommonUtils.readProperties();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeEndpoints.class);
+    private static Response response = null;
 
-    public static Response postMethod() throws IOException, ParseException {
-        Object obj;
-        JSONParser parser = new JSONParser();
-        obj = parser.parse(new FileReader("src/test/resources/data/employee.json"));
-        readJson();
 
+    //post call
+    public static Response postCall(String name, String salary, int age) throws Exception {
+        Properties properties = CommonUtils.readProperties();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("", name);
+        jsonObject.put("", salary);
+        jsonObject.put("", age);
         response = RestAssured.given()
                 .when()
                 .contentType(ContentType.JSON)
-                .body(res)
-                .post(prop.getProperty("Employee_post"));
-
+                .body(jsonObject)
+                .post(properties.getProperty("Employee_post"));
+        Assert.assertEquals(response.getStatusCode(), "201");
         return response;
     }
 
-    public static Response getMethod() {
+    // data validations for post call
+    public static void dataValidations(Response response) throws Exception {
+        JSONObject expObj = CommonUtils.readJsonFile("employee.json");
+        JSONObject actObt = (JSONObject) response;
+        Assert.assertEquals(expObj.getJSONObject("name"), actObt.getJSONObject("name"));
+    }
 
+    public static Response getCall() {
         response = RestAssured.given()
                 .when()
-                .get(prop.getProperty("Employee_get"));
-
-        int statusCode = response.getStatusCode();
-        Assert.assertEquals(statusCode, 200);
+                .get("Employee_get");
+        Assert.assertEquals(response.getStatusCode(), "201");
         return response;
+    }
+
+    public static void dataValidations_get(Response response) throws Exception {
+        JSONObject expObj = CommonUtils.readJsonFile("employee.json");
+        JSONObject actObt = (JSONObject) response;
+        Assert.assertEquals(expObj.getJSONObject("id"), actObt.getJSONObject("id"));
+    }
+
+    public static Response deleteCall() {
+        response = RestAssured.given()
+                .contentType(ContentType.JSON)
+                .delete("Employee_delete");
+        Assert.assertEquals(response.getStatusCode(), "200", "Did not get response");
+        return response;
+    }
+
+    public static void dataValidations_delete(Response response) throws Exception {
+        JSONObject expObj = CommonUtils.readJsonFile("employee.json");
+        JSONObject actObt = (JSONObject) response;
+        Assert.assertEquals(expObj.getJSONObject("id"), actObt.getJSONObject("id"));
     }
 }
 

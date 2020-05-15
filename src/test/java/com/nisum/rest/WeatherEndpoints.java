@@ -4,95 +4,73 @@ import com.nisum.utils.CommonUtils;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-
 import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Properties;
 
-public class WeatherEndpoints extends CommonUtils {
+public class WeatherEndpoints {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WeatherEndpoints.class);
-    static Response response = null;
-    //static org.json.JSONObject jsonObject;
-    //static String station_id;
-    protected static Properties prop = null;
-
-    static {
-        try {
-            prop = CommonUtils.readProperties();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    private static Response response = null;
 
 
-    public static Response postMethod() throws IOException, ParseException {
-        Object obj;
-        JSONParser parser = new JSONParser();
-        obj = parser.parse(new FileReader("src/test/resources/data/Weather.json"));
+    //post call
+    public static Response postCall(String external_id, String name, int latitude, int longitude, int altitude) throws Exception {
+        Properties properties = CommonUtils.readProperties();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("", external_id);
+        jsonObject.put("", name);
+        jsonObject.put("", latitude);
+        jsonObject.put("", longitude);
+        jsonObject.put("", altitude);
 
-        readJson();
 
         response = RestAssured.given()
-                .when().queryParam("appid", prop.getProperty("APP_ID"))
+                .when().queryParam("app_id", "APP_ID")
                 .contentType(ContentType.JSON)
-                .body(res)
-                .post("weather_path");
-        System.out.println(response);
+                .body(jsonObject)
+                .post(properties.getProperty("weather_path"));
+        Assert.assertEquals(response.getStatusCode(), "201");
         return response;
     }
 
+    // data validations for post call
+    public static void dataValidations(Response response) throws Exception {
+        JSONObject expObj = CommonUtils.readJsonFile("Weather.json");
+        JSONObject actObt = (JSONObject) response;
+        Assert.assertEquals(expObj.getJSONObject("name"), actObt.getJSONObject("name"));
+    }
 
-    public static Response getResponse() {
+    public static Response getcall() {
         response = RestAssured.given()
-                .when().queryParam("appid", prop.getProperty("APP_ID"))
-                .get(prop.getProperty("weather_path"));
-        System.out.println(response);
+                .when().queryParam("appid", "API_ID")
+                .contentType(ContentType.JSON)
+                .get("weather_path" + "station_id");
+        Assert.assertEquals(response.getStatusCode(), "200");
         return response;
+    }
+
+    public static void dataValidations_get(Response response) throws Exception {
+        JSONObject expObj = CommonUtils.readJsonFile("Weather.json");
+        JSONObject actObt = (JSONObject) response;
+        Assert.assertEquals(expObj.getJSONObject("station_id"), actObt.getJSONObject("station_id"));
+    }
 
 
+    public static Response deletecall() {
+        response = RestAssured.given()
+                .when().queryParam("appid", "API_ID")
+                .get("weather_path");
+        Assert.assertEquals(response.getStatusCode(), "404", "Did not get response");
+        return response;
+    }
+
+    public static void dataValidations_delete(Response response) throws Exception {
+        JSONObject expObj = CommonUtils.readJsonFile("Weather.json");
+        JSONObject actObt = (JSONObject) response;
+        Assert.assertEquals(expObj.getJSONObject("station_id"), actObt.getJSONObject("station_id"));
     }
 }
-
-   /* RestAssured.baseURI ="http://api.openweathermap.org/data/3.0";
-
-    Response postresponse = null;
-    JSONParser parser = new JSONParser();
-        try
-
-    {
-
-        Object obj = parser.parse(new FileReader("src/main/resources/ConfigureProperties/CreateJSON_file.json"));
-
-        JSONObject jsonObject = (JSONObject) obj;
-
-        String external_id = Random_numberGenerator.radomNumber();
-        System.out.println(external_id);
-
-        jsonObject.remove("external_id");
-        jsonObject.put("external_id", external_id);
-
-        System.out.println("JSON Response :: " + jsonObject);
-        try {
-
-            postresponse = RestAssured.given()
-                    .when().queryParam("appid", prop.getProperty("APP_ID"))
-                    .contentType(ContentType.JSON)
-                    .body(jsonObject.toString())
-                    .post("/stations");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Response response = postresponse;
-        String str = response.getBody().asString();
-        System.out.println(str);
-    }*/

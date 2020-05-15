@@ -4,56 +4,47 @@ import com.nisum.utils.CommonUtils;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.apache.log4j.Logger;
 import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Properties;
 
-public class ReqResEndpoints extends CommonUtils {
-    // private static Logger log = Logger.getLogger(ReqResEndpoints.class);
-    // static JSONObject jsonObject;
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ReqResEndpoints.class);
-    static Response response = null;
+public class ReqResEndpoints {
 
-    protected static Properties prop = null;
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReqResEndpoints.class);
+    private static Response response = null;
 
-    static {
-        try {
-            prop = CommonUtils.readProperties();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
-    public static Response postMethod() throws IOException, ParseException {
-        Object obj;
-        JSONParser parser = new JSONParser();
-        obj = parser.parse(new FileReader("src/test/resources/data/Reqres.json"));
-        readJson();
+    //post call
+    public static Response postCall(String name, String job) throws Exception {
+        Properties properties = CommonUtils.readProperties();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("", name);
+        jsonObject.put("", job);
+
         response = RestAssured.given()
                 .when()
                 .contentType(ContentType.JSON)
-                .body(res)
-                .post(prop.getProperty("GET_PATH"));
-
+                .body(jsonObject)
+                .post(properties.getProperty("GET_PATH"));
+        Assert.assertEquals(response.getStatusCode(), "201");
         return response;
     }
 
-    public static Response getMethod() {
-        response = RestAssured.given()
-                .when().queryParam("page", prop.getProperty("param"))
-                .get(prop.getProperty("GET_PATH"));
+    // data validations for post call
+    public static void dataValidations(Response response) {
+        JSONObject expObj = CommonUtils.readJsonFile("ReqRes.json");
+        JSONObject actObt = (JSONObject) response;
+        Assert.assertEquals(expObj.getJSONObject("name"), actObt.getJSONObject("name"));
+    }
 
-        //   int statusCode = response.getStatusCode();
+    public static Response getCall() {
+        response = RestAssured.given()
+                .when().queryParam("page", "param")
+                .get("GET_PATH");
+        Assert.assertEquals(response.getStatusCode(), "200", "verifyCode");
         return response;
     }
 }

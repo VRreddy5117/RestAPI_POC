@@ -1,8 +1,7 @@
-
 {
-  "external_id": "99585",
-  "name": "cadapa",
-  "latitude": 62,
-  "longitude": 126,
-  "altitude": 118
+  "external_id": "KUR_001",
+  "Name": "Kurnool Test Station",
+  "Latitude": 17,
+  "Longitude": 78,
+  "Altitude": 542
 }
