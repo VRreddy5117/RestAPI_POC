@@ -9,56 +9,59 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
-import java.util.Properties;
+import static java.lang.System.getProperty;
 
 public class EmployeeEndpoints {
 
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeEndpoints.class);
-    private static Response response = null;
 
+    String endpointURL = CommonUtils.readProperties(getProperty("Employee_path"));
 
+    //s RestAssured.baseURI = endpointURL;
     //post call
-    public static Response postCall(String name, String salary, int age) throws Exception {
-        Properties properties = CommonUtils.readProperties();
+    public static Response postemployee(String name, int salary, String age) {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("", name);
-        jsonObject.put("", salary);
-        jsonObject.put("", age);
-        response = RestAssured.given()
+        jsonObject.put("name", name);
+        jsonObject.put("salary", salary);
+        jsonObject.put("age", age);
+        Response response = RestAssured.given()
                 .when()
                 .contentType(ContentType.JSON)
                 .body(jsonObject)
-                .post(properties.getProperty("Employee_post"));
-        Assert.assertEquals(response.getStatusCode(), "201");
+                .post(RestAssured.baseURI + CommonUtils.readProperties("Employee_post"));
+        Assert.assertEquals(response.getStatusCode(), 201);
         return response;
     }
 
     // data validations for post call
-    public static void dataValidations(Response response) throws Exception {
+    public static void dataValidations(Response response) {
         JSONObject expObj = CommonUtils.readJsonFile("employee.json");
-        JSONObject actObt = (JSONObject) response;
+        JSONObject actObt = new JSONObject(response.getBody().asString());
         Assert.assertEquals(expObj.getJSONObject("name"), actObt.getJSONObject("name"));
     }
 
-    public static Response getCall() {
-        response = RestAssured.given()
+    public static Response getEmployees() {
+        Response response = RestAssured.given()
                 .when()
-                .get("Employee_get");
-        Assert.assertEquals(response.getStatusCode(), "201");
+                .get(CommonUtils.readProperties("Employee_get"));
+        Assert.assertEquals(response.getStatusCode(), 200);
         return response;
     }
 
     public static void dataValidations_get(Response response) throws Exception {
         JSONObject expObj = CommonUtils.readJsonFile("employee.json");
         JSONObject actObt = (JSONObject) response;
-        Assert.assertEquals(expObj.getJSONObject("id"), actObt.getJSONObject("id"));
+        Assert.assertEquals(expObj.getJSONObject("name"), actObt.getJSONObject("name"));
+        Assert.assertEquals(expObj.getJSONObject("age"), actObt.getJSONObject("age"));
+        Assert.assertEquals(expObj.getJSONObject("salary"), actObt.getJSONObject("salary"));
     }
 
-    public static Response deleteCall() {
-        response = RestAssured.given()
+    public static Response deleteEmployee(int age) {
+        Response response = RestAssured.given()
                 .contentType(ContentType.JSON)
-                .delete("Employee_delete");
+                //  .delete("Employee_delete");
+                .delete(CommonUtils.readProperties("Employee_delete +"));
         Assert.assertEquals(response.getStatusCode(), "200", "Did not get response");
         return response;
     }
@@ -66,7 +69,23 @@ public class EmployeeEndpoints {
     public static void dataValidations_delete(Response response) throws Exception {
         JSONObject expObj = CommonUtils.readJsonFile("employee.json");
         JSONObject actObt = (JSONObject) response;
-        Assert.assertEquals(expObj.getJSONObject("id"), actObt.getJSONObject("id"));
+        // System.out.println(response);
+        LOGGER.info("print response : " + response);
+        Assert.assertEquals(expObj.getJSONObject("age"), actObt.getJSONObject("age"));
+        Assert.assertEquals(expObj.getJSONObject("name"), actObt.getJSONObject("name"));
+        Assert.assertEquals(expObj.getJSONObject("salary"), actObt.getJSONObject("salary"));
     }
+
+    public static void validatePatchEmployees(Response response) {
+    }
+
+/*    public static void validatePatchEmployees(Response response) {
+    }
+
+    public static Response updateEmployee(String name, int salary, int age) {
+    }*/
+
 }
+
+
 

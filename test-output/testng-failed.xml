@@ -3,13 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default Suite]">
   <test thread-count="5" name="RestAPI_POC(failed)">
     <classes>
-      <class name="com.nisum.rest.baseTest.TestFile.ReqresTest">
+      <class name="com.nisum.test.EmployeeTest">
         <methods>
-          <include name="getrequest"/>
-          <include name="callingBaseURI"/>
-          <include name="reponseJson"/>
+          <include name="tearDown"/>
+          <include name="setUp"/>
+          <include name="post_call" invocation-numbers="0"/>
         </methods>
-      </class> <!-- ReqresTest -->
+      </class> <!-- com.nisum.test.EmployeeTest -->
     </classes>
   </test> <!-- RestAPI_POC(failed) -->
 </suite> <!-- Failed suite [Default Suite] -->

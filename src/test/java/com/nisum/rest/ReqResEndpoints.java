@@ -18,33 +18,42 @@ public class ReqResEndpoints {
 
 
     //post call
-    public static Response postCall(String name, String job) throws Exception {
-        Properties properties = CommonUtils.readProperties();
+    public static Response postCall(String name, String job)  {
+      // Properties properties = CommonUtils.readProperties();
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("", name);
-        jsonObject.put("", job);
+        jsonObject.put("name", name);
+        jsonObject.put("job", job);
 
         response = RestAssured.given()
                 .when()
                 .contentType(ContentType.JSON)
                 .body(jsonObject)
-                .post(properties.getProperty("GET_PATH"));
-        Assert.assertEquals(response.getStatusCode(), "201");
+                .post(CommonUtils.readProperties("Employee_get"));
+
+      //  Assert.assertEquals(response.getStatusCode(), "201");
         return response;
     }
 
     // data validations for post call
+  /*  @DataProvider(name = "data-provider")
+    public Object[][] dataProviderMethod() {
+        return new Object[][] { { "postcall_data" }, { "Postcall_url" } };
+    }*/
+
     public static void dataValidations(Response response) {
         JSONObject expObj = CommonUtils.readJsonFile("ReqRes.json");
         JSONObject actObt = (JSONObject) response;
+        LOGGER.info("print resoonse : " +response);
         Assert.assertEquals(expObj.getJSONObject("name"), actObt.getJSONObject("name"));
+        Assert.assertEquals(expObj.getJSONObject("job"), actObt.getJSONObject("job"));
     }
 
     public static Response getCall() {
         response = RestAssured.given()
                 .when().queryParam("page", "param")
-                .get("GET_PATH");
-        Assert.assertEquals(response.getStatusCode(), "200", "verifyCode");
+              //  .get("GET_PATH");
+        .get(CommonUtils.readProperties("GET_PATH"));
+       // Assert.assertEquals(response.getStatusCode(), "200", "verifyCode");
         return response;
     }
 }

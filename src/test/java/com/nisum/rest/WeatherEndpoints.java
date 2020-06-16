@@ -9,8 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
-import java.util.Properties;
-
 public class WeatherEndpoints {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WeatherEndpoints.class);
@@ -18,8 +16,8 @@ public class WeatherEndpoints {
 
 
     //post call
-    public static Response postCall(String external_id, String name, int latitude, int longitude, int altitude) throws Exception {
-        Properties properties = CommonUtils.readProperties();
+    public static Response postCall(String external_id, String name, int latitude, int longitude, int altitude)  {
+       // Properties properties = CommonUtils.readProperties();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("", external_id);
         jsonObject.put("", name);
@@ -32,23 +30,25 @@ public class WeatherEndpoints {
                 .when().queryParam("app_id", "APP_ID")
                 .contentType(ContentType.JSON)
                 .body(jsonObject)
-                .post(properties.getProperty("weather_path"));
+               // .post(properties.getProperty("weather_path"));
+                  .post(CommonUtils.readProperties("weather_path"));
         Assert.assertEquals(response.getStatusCode(), "201");
         return response;
     }
 
     // data validations for post call
-    public static void dataValidations(Response response) throws Exception {
+    public static void dataValidations(Response response) {
         JSONObject expObj = CommonUtils.readJsonFile("Weather.json");
         JSONObject actObt = (JSONObject) response;
         Assert.assertEquals(expObj.getJSONObject("name"), actObt.getJSONObject("name"));
     }
 
-    public static Response getcall() {
+    public static Response getcall( String appid) {
         response = RestAssured.given()
                 .when().queryParam("appid", "API_ID")
                 .contentType(ContentType.JSON)
-                .get("weather_path" + "station_id");
+               // .get("weather_path" + "station_id");
+              .get(CommonUtils.readProperties("weather_path" + "station_id"));
         Assert.assertEquals(response.getStatusCode(), "200");
         return response;
     }
@@ -56,14 +56,20 @@ public class WeatherEndpoints {
     public static void dataValidations_get(Response response) throws Exception {
         JSONObject expObj = CommonUtils.readJsonFile("Weather.json");
         JSONObject actObt = (JSONObject) response;
-        Assert.assertEquals(expObj.getJSONObject("station_id"), actObt.getJSONObject("station_id"));
+        Assert.assertEquals(expObj.getJSONObject("external_id"), actObt.getJSONObject("external_id"));
+        Assert.assertEquals(expObj.getJSONObject("Name"), actObt.getJSONObject("Name"));
+        Assert.assertEquals(expObj.getJSONObject("Latitude"), actObt.getJSONObject("Latitude"));
+        Assert.assertEquals(expObj.getJSONObject("Longitude"), actObt.getJSONObject("Longitude"));
+        Assert.assertEquals(expObj.getJSONObject("Altitude"), actObt.getJSONObject("Altitude"));
+
     }
 
 
-    public static Response deletecall() {
+    public static Response deletecall(String app_id) {
         response = RestAssured.given()
                 .when().queryParam("appid", "API_ID")
-                .get("weather_path");
+               // .delete("weather_path");
+                .delete(CommonUtils.readProperties("weather_path"));
         Assert.assertEquals(response.getStatusCode(), "404", "Did not get response");
         return response;
     }

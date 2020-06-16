@@ -9,19 +9,28 @@
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
 <tr><th colspan="8">Default Suite</th></tr>
-<tr><td><a href="#t0">RestAPI_POC</a></td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num attn">1</td><td class="num">6,107</td><td></td><td></td></tr>
+<tr><td><a href="#t0">RestAPI_POC</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num attn">1</td><td class="num">889</td><td></td><td></td></tr>
 </table>
-<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Default Suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">RestAPI_POC &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">com.nisum.rest.baseTest.TestFile.ReqresTest</td><td><a href="#m0">getrequest</a></td><td rowspan="1">1589111511817</td><td rowspan="1">2789</td></tr><tr><th colspan="4">RestAPI_POC &#8212; passed</th></tr><tr class="passedeven"><td rowspan="1">com.nisum.rest.baseTest.TestFile.ReqresTest</td><td><a href="#m1">postrequest</a></td><td rowspan="1">1589111514613</td><td rowspan="1">2752</td></tr></tbody>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Default Suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">RestAPI_POC &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">com.nisum.test.EmployeeTest</td><td><a href="#m0">post_call</a></td><td rowspan="1">1590569675741</td><td rowspan="1">198</td></tr></tbody>
 </table>
-<h2>RestAPI_POC</h2><h3 id="m0">com.restassured.baseTest.TestFile.ReqresTest#getrequest</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.json.JSONException:
-    JSONObject[&quot;page&quot;] not a string.
-    at org.json.JSONObject.getString(JSONObject.java:840)
-    at com.nisum.rest.ReqresAPI.getresponse(ReqresAPI.java:81)
-    at com.nisum.rest.baseTest.TestFile.ReqresTest.getrequest(ReqresTest.java:47)
-    at java.util.ArrayList.forEach(ArrayList.java:1257)
-    at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)
-    at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:110)
-    ... Removed 24 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m1">com.restassured.baseTest.TestFile.ReqresTest#postrequest</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h2>RestAPI_POC</h2><h3 id="m0">com.nisum.test.EmployeeTest#post_call</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th><th>Parameter #3</th></tr><tr class="param stripe"><td>Ramana</td><td>12000</td><td>25</td></tr><tr><th colspan="3">Exception</th></tr><tr><td colspan="3"><div class="stacktrace">java.lang.IllegalArgumentException: baseURI cannot be null
+	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallConstructor(CallSiteArray.java:59)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:263)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
+	at io.restassured.internal.common.assertion.AssertParameter.notNull(AssertParameter.groovy:26)
+	at io.restassured.internal.common.assertion.AssertParameter$notNull.callStatic(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallStatic(CallSiteArray.java:55)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callStatic(AbstractCallSite.java:217)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callStatic(AbstractCallSite.java:240)
+	at io.restassured.internal.RequestSpecificationImpl.&lt;init&gt;(RequestSpecificationImpl.groovy:135)
+	at io.restassured.RestAssured.createTestSpecification(RestAssured.java:1452)
+	at io.restassured.RestAssured.given(RestAssured.java:653)
+	at com.nisum.rest.EmployeeEndpoints.postemployee(EmployeeEndpoints.java:27)
+	at com.nisum.test.EmployeeTest.post_call(EmployeeTest.java:33)
+	at java.util.ArrayList.forEach(ArrayList.java:1257)
+	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)
+	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:110)
+... Removed 30 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 </body>
 </html>

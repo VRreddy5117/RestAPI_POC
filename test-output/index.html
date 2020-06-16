@@ -91,7 +91,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">2 methods, 1 failed,   1 passed</span>
+                    <span class="method-stats">1 method, 1 failed,   </span>
                   </li>
                   <li>
                     <span class="method-list-title failed">Failed methods</span>
@@ -102,24 +102,10 @@
                     <div class="method-list-content failed suite-Default_Suite">
                       <span>
                         <img width="3%" src="failed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Default_Suite" title="com.nisum.rest.baseTest.TestFile.ReqresTest" hash-for-method="getrequest">getrequest</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_Suite" title="com.nisum.test.EmployeeTest" hash-for-method="post_call(Ramana, 12000, 25)">post_call(Ramana, 12000, 25)</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-Default_Suite -->
-                  </li>
-                  <li>
-                    <span class="method-list-title passed">Passed methods</span>
-                    <span class="show-or-hide-methods passed">
-                      <a href="#" panel-name="suite-Default_Suite" class="hide-methods passed suite-Default_Suite"> (hide)</a> <!-- hide-methods passed suite-Default_Suite -->
-                      <a href="#" panel-name="suite-Default_Suite" class="show-methods passed suite-Default_Suite"> (show)</a> <!-- show-methods passed suite-Default_Suite -->
-                    </span>
-                    <div class="method-list-content passed suite-Default_Suite">
-                      <span>
-                        <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Default_Suite" title="com.nisum.rest.baseTest.TestFile.ReqresTest" hash-for-method="postrequest">postrequest</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                    </div> <!-- method-list-content passed suite-Default_Suite -->
                   </li>
                 </ul>
               </div> <!-- suite-section-content -->
@@ -134,46 +120,39 @@
           <div class="suite-Default_Suite-class-failed">
             <div class="main-panel-header rounded-window-top">
               <img src="failed.png"/>
-              <span class="class-name">com.nisum.rest.baseTest.TestFile.ReqresTest</span>
+              <span class="class-name">com.nisum.test.EmployeeTest</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="getrequest">
-                  </a> <!-- getrequest -->
-                  <span class="method-name">getrequest</span>
-                  <div class="stack-trace">org.json.JSONException: JSONObject[&quot;page&quot;] not a string.
-                    at org.json.JSONObject.getString(JSONObject.java:840)
-                    at com.nisum.rest.ReqresAPI.getresponse(ReqresAPI.java:81)
-                    at com.nisum.rest.baseTest.TestFile.ReqresTest.getrequest(ReqresTest.java:47)
-                    at java.util.ArrayList.forEach(ArrayList.java:1257)
-                    at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)
-                    at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:110)
-                    ... Removed 24 stack frames
-                  </div> <!-- stack-trace -->
-                  <em>
-(using reqres API getting all existing users data)                  </em>
+                  <a name="post_call(Ramana, 12000, 25)">
+                  </a> <!-- post_call(Ramana, 12000, 25) -->
+                  <span class="method-name">post_call</span>
+                  <span class="parameters">(Ramana, 12000, 25)</span>
+                  <div class="stack-trace">java.lang.IllegalArgumentException: baseURI cannot be null
+	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallConstructor(CallSiteArray.java:59)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:263)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
+	at io.restassured.internal.common.assertion.AssertParameter.notNull(AssertParameter.groovy:26)
+	at io.restassured.internal.common.assertion.AssertParameter$notNull.callStatic(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallStatic(CallSiteArray.java:55)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callStatic(AbstractCallSite.java:217)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callStatic(AbstractCallSite.java:240)
+	at io.restassured.internal.RequestSpecificationImpl.&lt;init&gt;(RequestSpecificationImpl.groovy:135)
+	at io.restassured.RestAssured.createTestSpecification(RestAssured.java:1452)
+	at io.restassured.RestAssured.given(RestAssured.java:653)
+	at com.nisum.rest.EmployeeEndpoints.postemployee(EmployeeEndpoints.java:27)
+	at com.nisum.test.EmployeeTest.post_call(EmployeeTest.java:33)
+	at java.util.ArrayList.forEach(ArrayList.java:1257)
+	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)
+	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:110)
+... Removed 30 stack frames
+</div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
           </div> <!-- suite-Default_Suite-class-failed -->
-          <div class="suite-Default_Suite-class-passed">
-            <div class="main-panel-header rounded-window-top">
-              <img src="passed.png"/>
-              <span class="class-name">com.nisum.rest.baseTest.TestFile.ReqresTest</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-              <div class="method">
-                <div class="method-content">
-                  <a name="postrequest">
-                  </a> <!-- postrequest -->
-                  <span class="method-name">postrequest</span>
-                  <em>
-(using reqres api creating new user)                  </em>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-            </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-Default_Suite-class-passed -->
         </div> <!-- panel Default_Suite -->
         <div panel-name="test-xml-Default_Suite" class="panel">
           <div class="main-panel-header rounded-window-top">
@@ -186,7 +165,11 @@
 &lt;suite guice-stage=&quot;DEVELOPMENT&quot; name=&quot;Default Suite&quot;&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;RestAPI_POC&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;com.restassured.baseTest.TestFile.ReqresTest&quot;/&gt;
+      &lt;class name=&quot;com.nisum.test.EmployeeTest&quot;&gt;
+        &lt;methods&gt;
+          &lt;include name=&quot;post_call&quot;/&gt;
+        &lt;/methods&gt;
+      &lt;/class&gt; &lt;!-- com.nisum.test.EmployeeTest --&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- RestAPI_POC --&gt;
 &lt;/suite&gt; &lt;!-- Default Suite --&gt;
@@ -226,20 +209,16 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(2);
+data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'getrequest')
-data.setCell(0, 2, 'com.restassured.baseTest.TestFile.ReqresTest')
-data.setCell(0, 3, 2789);
-data.setCell(1, 0, 1)
-data.setCell(1, 1, 'postrequest')
-data.setCell(1, 2, 'com.restassured.baseTest.TestFile.ReqresTest')
-data.setCell(1, 3, 2752);
+data.setCell(0, 1, 'post_call')
+data.setCell(0, 2, 'com.nisum.test.EmployeeTest')
+data.setCell(0, 3, 198);
 window.suiteTableData['Default_Suite']= { tableData: data, tableDiv: 'times-div-Default_Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 5 seconds</span>
+              <span class="suite-total-time">Total running time: 198 ms</span>
               <div id="times-div-Default_Suite">
               </div> <!-- times-div-Default_Suite -->
             </div> <!-- times-div -->
@@ -254,9 +233,28 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Default_Suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">0 ignored methods</span>
+            <span class="header-content">7 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
+            <div class="ignored-class-div">
+              <span class="ignored-class-name">com.nisum.test.EmployeeTest</span>
+              <div class="ignored-methods-div">
+                <span class="ignored-method-name">test1</span>
+                <br/>
+                <span class="ignored-method-name">delete_call</span>
+                <br/>
+                <span class="ignored-method-name">get_call</span>
+                <br/>
+                <span class="ignored-method-name">testSingleString</span>
+                <br/>
+                <span class="ignored-method-name">verifyData1</span>
+                <br/>
+                <span class="ignored-method-name">test2</span>
+                <br/>
+                <span class="ignored-method-name">test3</span>
+                <br/>
+              </div> <!-- ignored-methods-div -->
+            </div> <!-- ignored-class-div -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
         <div panel-name="chronological-Default_Suite" class="panel">
@@ -265,25 +263,21 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">com.nisum.rest.baseTest.TestFile.ReqresTest</div> <!-- chronological-class-name -->
-              <div class="configuration-test before">
-                <span class="method-name">callingBaseURI</span>
+              <div class="chronological-class-name">com.nisum.test.EmployeeTest</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">setUp</span>
                 <span class="method-start">0 ms</span>
-              </div> <!-- configuration-test before -->
-              <div class="configuration-test before">
-                <span class="method-name">reponseJson</span>
-                <span class="method-start">529 ms</span>
-              </div> <!-- configuration-test before -->
+              </div> <!-- configuration-class before -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
-                <span class="method-name">getrequest</span>
-                <span class="method-start">554 ms</span>
+                <span class="method-name">post_call(Ramana, 12000, 25)</span>
+                <span class="method-start">658 ms</span>
               </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">postrequest</span>
-                <span class="method-start">3350 ms</span>
-              </div> <!-- test-method -->
+              <div class="configuration-test after">
+                <span class="method-name">tearDown</span>
+                <span class="method-start">870 ms</span>
+              </div> <!-- configuration-test after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
       </div> <!-- main-panel-root -->
